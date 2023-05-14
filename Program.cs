@@ -9,17 +9,12 @@ namespace Telegram_Bot
     class Program
     {
 
-        
-
         static void Main(string[] args)
         {
-
             var client = new TelegramBotClient("6008200461:AAEdBKBx2kLt1vMyRIrmIUXpoPWLgtdC2Fc");
             client.StartReceiving(Update, Error);
             Console.ReadLine();
         }
-
-
 
         async static Task Update(ITelegramBotClient botClient, Update update, CancellationToken token)
         {
@@ -34,18 +29,14 @@ namespace Telegram_Bot
                 }
             }
             if (massage.Photo != null)
-                {
-                    await botClient.SendTextMessageAsync(massage.Chat.Id, "Норм фото");
+            {
+                await botClient.SendTextMessageAsync(massage.Chat.Id, "Норм фото");
 
-                    var fileId = update.Message.Photo.Last().FileId;
-                    var fileInfo = await botClient.GetFileAsync(fileId);
-                    var filePath = fileInfo.FilePath;
-
-
-
+                var fileId = update.Message.Photo.Last().FileId;
+                var fileInfo = await botClient.GetFileAsync(fileId);
+                var filePath = fileInfo.FilePath;
 
                 //const string destinationFilePath = "../downloaded.file";
-
 
                 const string destinationFilePath = "C:\\Users\\NIKnak\\Desktop\\1/downloaded.png";
 
@@ -55,53 +46,13 @@ namespace Telegram_Bot
                 destination: fileStream);
                 fileStream.Close();
 
-
-
-
-
                 return;
-                }
-
-
-
-
-
-
-            
+            }
         }
-
-
-
-
-
 
         private static Task Error(ITelegramBotClient arg1, Exception arg2, CancellationToken arg3)
         {
             throw new NotImplementedException();
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
